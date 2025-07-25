@@ -5,112 +5,156 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth; /* PENTING: Untuk scroll mulus saat tombol diklik */
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #FFF0F5; /* Lavender Blush - Pink yang sangat lembut */
     color: #333;
     overflow-x: hidden;
-    animation: fadeInAnimation ease 1.5s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* EFEK BARU: Background gradasi yang bergerak */
+    background: linear-gradient(-45deg, #fce1e8, #ffc5d5, #f8b5c9, #f7d7e6);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
 
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-     }
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* Kontainer Utama */
-.container {
+/* --- Layar Pembuka --- */
+#welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fce1e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+    transition: opacity 1.2s ease-in-out, visibility 1.2s;
+}
+
+#welcome-overlay.hidden {
+    opacity: 0;
+    visibility: hidden; /* Sembunyikan sepenuhnya setelah transisi */
+}
+
+.welcome-content {
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Struktur Halaman Tunggal (One-Page) --- */
+.page-section {
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 20px;
+    padding: 60px 20px;
+    position: relative;
 }
 
-/* Tombol */
+/* Penampung konten agar rapi di tengah */
+.content, .content-wrapper {
+    max-width: 1100px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 1s;
+}
+
+/* --- Elemen Teks --- */
+.title-special {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 10vw, 6rem); /* Ukuran font responsif */
+    color: #b93b8f;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: #db7093;
+    margin-top: 15px;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: #5c474f;
+    margin-top: 10px;
+}
+
+.page-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: #b93b8f;
+    margin-bottom: 40px;
+}
+
+/* --- Tombol --- */
 .btn {
     display: inline-block;
-    background: linear-gradient(45deg, #FF69B4, #FFB6C1); /* Hot Pink ke Light Pink */
+    background: linear-gradient(45deg, #FF69B4, #db7093);
     color: white;
-    padding: 15px 30px;
+    padding: 15px 35px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
     font-size: 16px;
     margin-top: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(185, 59, 143, 0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(185, 59, 143, 0.5);
 }
 
 .big-btn {
-    padding: 20px 40px;
+    padding: 20px 45px;
     font-size: 20px;
 }
 
-/* Teks dan Judul */
-.title-special {
-    font-family: 'Dancing Script', cursive;
-    font-size: 5rem;
-    color: #C71585; /* Medium Violet Red */
-    margin-bottom: 10px;
-}
-
-.name {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: #db7093; /* Pale Violet Red */
-    margin-top: 20px;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: #555;
-}
-
-.page-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
-    color: #C71585;
-    margin-bottom: 40px;
-}
-
-/* Halaman Galeri */
+/* --- Galeri --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    width: 100%;
-    max-width: 1000px;
     margin-bottom: 40px;
 }
 
 .card {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .card h3 {
-    color: #C71585;
+    color: #c71585;
     margin-bottom: 15px;
     font-size: 1.5rem;
 }
@@ -121,25 +165,22 @@ body {
     line-height: 1.6;
 }
 
-/* Halaman Surat */
-.wishes-page {
-    background-image: linear-gradient(to top, #fff1f5 0%, #ffffff 100%);
-}
-
+/* --- Surat --- */
 .letter-box {
-    background: #ffffff;
-    padding: 40px 50px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: clamp(20px, 5vw, 50px);
     max-width: 800px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     text-align: left;
     border-top: 10px solid #FFB6C1;
 }
 
 .letter-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: #C71585;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    color: #c71585;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -154,11 +195,11 @@ body {
 .quote {
     font-style: italic;
     font-size: 1.2rem;
-    color: #C71585;
+    color: #b93b8f;
     padding: 20px;
     margin: 30px 0;
     border-left: 5px solid #FFB6C1;
-    background-color: #FFF0F5;
+    background-color: rgba(255, 240, 245, 0.8);
     border-radius: 0 8px 8px 0;
 }
 
@@ -173,4 +214,33 @@ body {
     font-family: 'Dancing Script', cursive;
     font-size: 2rem;
     color: #db7093;
+}
+
+/* Indikator Scroll */
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    color: #db7093;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator .arrow {
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid #db7093;
+    border-bottom: 2px solid #db7093;
+    transform: rotate(45deg);
+    margin: 5px auto;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
 }

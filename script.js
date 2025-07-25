@@ -1,29 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // Ambil semua elemen yang dibutuhkan
+    const startButton = document.getElementById('start-button');
+    const welcomeOverlay = document.getElementById('welcome-overlay');
+    const audio = document.getElementById('birthday-song');
     const confettiButton = document.getElementById('confetti-button');
+    const scrollButtons = document.querySelectorAll('.scroll-btn');
 
+    // --- Logika Tombol Pembuka ---
+    // Fungsinya HANYA untuk menyembunyikan layar pembuka
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            welcomeOverlay.classList.add('hidden');
+
+            if (audio && audio.paused) {
+                audio.currentTime = 108; // Mulai dari 1 menit 48 detik
+                audio.play();
+            }
+        });
+    }
+
+    // --- Logika Tombol Scroll ---
+    // Membuat semua tombol navigasi bisa scroll dengan mulus
+    scrollButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // --- Logika Tombol Kejutan Final ---
+    // Fungsinya: MEMUTAR MUSIK + MEMUNCULKAN KONFETI
     if (confettiButton) {
         confettiButton.addEventListener('click', () => {
-            // Pengaturan konfeti
-            const duration = 5 * 1000; // 5 detik
-            const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-            function randomInRange(min, max) {
-                return Math.random() * (max - min) + min;
+            
+            // 1. Putar Musik dari bagian reff
+            if (audio && audio.paused) {
+                audio.currentTime = 142; // Mulai dari 1 menit 48 detik
+                audio.play();
             }
 
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
+            // 2. Tampilkan Hujan Konfeti
+            // Pengaturan dasar konfeti
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 }
+            };
 
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
 
-                const particleCount = 50 * (timeLeft / duration);
-                // Tembakkan konfeti dari kiri dan kanan
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#FFC0CB', '#FF69B4', '#C71585', '#FFFFFF'] }));
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#FFC0CB', '#FF69B4', '#C71585', '#FFFFFF'] }));
-            }, 250);
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
+
+            // Ubah teks tombol setelah diklik
+            confettiButton.textContent = "I Love You! ❤️";
         });
     }
 });

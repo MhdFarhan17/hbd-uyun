@@ -3,31 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khusus Untukmu, Uyunn</title>
+    <title>Happy Birthday Uyunn</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div style="position: fixed; z-index: -99; width: 1px; height: 1px; overflow: hidden;">
-        <iframe 
-            width="1" 
-            height="1" 
-            src="https://www.youtube.com/embed/IzvZ0gOXiNA?si=o6oZnk3dVrVnv7v-" title="YouTube video player"
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
+    <div id="welcome-overlay">
+        <div class="welcome-content">
+            <h1 class="title-special">Sebuah Hadiah Kecil...</h1>
+            <p class="subtitle">Dibuat khusus untuk merayakan hari ulang tahun Uyunn.</p>
+            <button id="start-button" class="btn">Mulai Jelajahi</button>
+        </div>
     </div>
 
-    <div class="container index-page">
+    <audio id="birthday-song" loop>
+        <source src="jamrud.mp3" type="audio/mpeg">
+        Browser-mu tidak mendukung elemen audio.
+    </audio>
+
+    <section id="home" class="page-section">
         <div class="content">
             <h1 class="title-special">Hai, Cantik...</h1>
             <p class="subtitle">Aku punya sesuatu yang spesial untukmu.</p>
             <p class="name">Nurul Mutmainah Alzahra</p>
-            <a href="gallery.html" class="btn">Klik Di Sini Untukmu ❤️</a>
+            <a href="#gallery" class="btn scroll-btn">Lihat Selanjutnya ❤️</a>
         </div>
-    </div>
+        <div class="scroll-indicator">
+            <p>Scroll ke bawah</p>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <section id="gallery" class="page-section">
+        <div class="content-wrapper">
+            <h1 class="page-title">Beberapa Hal yang Aku Kagumi Darimu...</h1>
+            <div class="gallery-grid">
+                <div class="card">
+                    <h3>Kekuatanmu</h3>
+                    <p>Sebagai anak pertama, kamu hebat dan tangguh. Kamu adalah inspirasi.</p>
+                </div>
+                <div class="card">
+                    <h3>Aroma Vanilla</h3>
+                    <p>Seperti parfum vanilla favoritmu, kehadiranmu manis dan menenangkan.</p>
+                </div>
+                <div class="card">
+                    <h3>Sang Leo ♌</h3>
+                    <p>Percaya diri, bersemangat, dan pemimpin alami. Kamu bersinar terang!</p>
+                </div>
+                <div class="card">
+                    <h3>Masa Depan Cerahmu</h3>
+                    <p>Selamat untuk S2 Hukum di Undip! Aku yakin kamu akan jadi ahli hukum yang luar biasa.</p>
+                </div>
+            </div>
+            <a href="#wishes" class="btn scroll-btn">Ada surat untukmu...</a>
+        </div>
+    </section>
+
+    <section id="wishes" class="page-section">
+        <div class="letter-box">
+            <h1 class="letter-title">Untuk Nurul Mutmainah Alzahra,</h1>
+            <p class="letter-body">
+                Selamat ulang tahun yang ke-23, sayang. Maaf ya, aku tau ini sedikit terlambat, tapi rasanya setiap hari adalah hari yang tepat untuk merayakan seseorang sepertimu. Tanggal 25 Juli mungkin sudah lewat, tapi doaku untukmu tak akan pernah telat.
+            </p>
+            <p class="letter-body">
+                Di usiamu yang baru, kamu akan memulai babak baru yang luar biasa: melanjutkan S2 Hukum di Undip. Aku sangat bangga padamu. Kamu bukan hanya cantik, tapi juga cerdas dan ambisius. Dunia butuh lebih banyak wanita hebat sepertimu.
+            </p>
+            <blockquote class="quote">
+                "Aku tidak tahu di mana ujung perjalanan ini, tapi aku tahu bersamamu adalah awal dari semua kebahagiaan."
+            </blockquote>
+            <p class="letter-body">
+                Semoga di usia 23 ini, semua mimpimu perlahan terwujud. Semoga kamu selalu diberi kesehatan, kebahagiaan yang melimpah, dan kekuatan untuk menghadapi segala tantangan. Tetaplah menjadi Uyunn yang aku kenal, si Leo yang penuh semangat dengan hati selembut vanilla.
+            </p>
+            <p class="letter-closing">Dengan segenap cinta,</p>
+            <p class="letter-signature">Pengagum Rahasiamu</p>
+            <a href="#surprise" class="btn scroll-btn">Satu hal terakhir...</a>
+        </div>
+    </section>
+
+    <section id="surprise" class="page-section">
+        <div class="content-wrapper">
+            <h1 class="page-title">Happy Belated Birthday, Uyunn!</h1>
+            <p class="subtitle">Semoga kamu suka hadiah kecil ini.</p>
+            <button id="confetti-button" class="btn big-btn">Klik untuk Kejutan Final! 🎉</button>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
